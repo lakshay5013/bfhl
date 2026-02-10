@@ -60,12 +60,27 @@ router.post("/", async (req, res) => {
     });
 
   } catch (err) {
-    return res.status(500).json({
+
+  // ✅ Validation errors → 400
+  if (
+    err.message.includes("Invalid") ||
+    err.message.includes("must be") ||
+    err.message.includes("exactly one key")
+  ) {
+    return res.status(400).json({
       is_success: false,
       official_email: "lakshay3864.beai23@chitkara.edu.in",
       error: err.message
     });
   }
+
+  // ✅ Unexpected errors → 500
+  return res.status(500).json({
+    is_success: false,
+    official_email: "lakshay3864.beai23@chitkara.edu.in",
+    error: "Internal Server Error"
+  });
+}
 });
 
 export default router;
