@@ -61,7 +61,6 @@ router.post("/", async (req, res) => {
 
   } catch (err) {
 
-  // ✅ Validation errors → 400
   if (
     err.message.includes("Invalid") ||
     err.message.includes("must be") ||
@@ -74,7 +73,6 @@ router.post("/", async (req, res) => {
     });
   }
 
-  // ✅ Unexpected errors → 500
   return res.status(500).json({
     is_success: false,
     official_email: "lakshay3864.beai23@chitkara.edu.in",
